@@ -1,4 +1,4 @@
-from _datetime import datetime, UTC
+from datetime import datetime, UTC
 from ..extensions import db
 
 

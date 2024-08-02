@@ -1,12 +1,21 @@
-from flask import Blueprint
+from flask import Blueprint, render_template, request,redirect
 from ..extensions import db
 from ..models.posts import Post
 
 post = Blueprint('post', __name__)
 
-@post.route('/post/<subject>')
-def create_user(subject):
-    post = Post(subject=subject)
-    db.session.add(post)
-    db.session.commit()
-    return f'Post with subject {subject} created'
+@post.route('/post/create', methods=['POST', 'GET'])
+def create():
+    if request.method == 'POST':
+        teacher = request.form['teacher']
+        subject = request.form['subject']
+        student = request.form['student']
+        post = Post(teacher=teacher, subject=subject, student=student)
+        try:
+            db.session.add(post)
+            db.session.commit()
+            return redirect('/')
+        except Exception as e:
+            print(str(e))
+    else:
+        return render_template('post/create.html')
