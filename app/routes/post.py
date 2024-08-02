@@ -4,6 +4,11 @@ from ..models.posts import Post
 
 post = Blueprint('post', __name__)
 
+@post.route('/', methods=['GET', 'POST'])
+def all():
+    posts = Post.query.all()
+    return render_template('post/all.html', posts=posts)
+
 @post.route('/post/create', methods=['POST', 'GET'])
 def create():
     if request.method == 'POST':
