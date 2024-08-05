@@ -12,22 +12,27 @@
                 <th scope="col">Subject</th>
                 <th scope="col">Student</th>
                 <th scope="col">Date</th>
-                <th scope="col">Action</th>
+                {% if current_user.is_authenticated %}
+                    <th scope="col">Action</th>
+                {% endif %}
             </tr>
             </thead>
             <tbody>
             {% for post in posts %}
-            <tr>
-                <td>{{ post.id }}</td>
-                <td>{{ post.teacher }}</td>
-                <td>{{ post.subject }}</td>
-                <td>{{ post.student }}</td>
-                <td>{{ post.date.strftime('%Y-%m-%d %H:%M:%S') }}</td>
-                <td>
-                    <a href="{{ url_for('post.update', id=post.id) }}" class="btn btn-sm btn-secondary"><span class="fas fa-edit"></span></a>
-                    <a href="{{ url_for('post.delete', id=post.id) }}" class="btn btn-sm btn-danger"><span class="fas fa-trash"></span></a>
-                </td>
-            </tr>
+                <tr>
+                    <td>{{ post.id }}</td>
+                    <td>{{ post.subject }}</td>
+                    <td>{{ post.student }}</td>
+                    <td>{{ post.date.strftime('%Y-%m-%d %H:%M:%S') }}</td>
+                    {% if current_user.is_authenticated %}
+                        <td>
+                            <a href="{{ url_for('post.update', id=post.id) }}" class="btn btn-sm btn-secondary"><span
+                                    class="fas fa-edit"></span></a>
+                            <a href="{{ url_for('post.delete', id=post.id) }}" class="btn btn-sm btn-danger"><span
+                                    class="fas fa-trash"></span></a>
+                        </td>
+                    {% endif %}
+                </tr>
             {% endfor %}
             </tbody>
         </table>

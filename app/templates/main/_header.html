@@ -23,7 +23,9 @@
 
     <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
         <li><a href="/" class="nav-link px-2 ">Home</a></li>
+        {% if current_user.is_authenticated %}
         <li><a href="{{ url_for('post.create') }}" class="nav-link px-2 text-secondary">Add topic</a></li>
+        {% endif %}
         <li><a href="#" class="nav-link px-2 text-secondary">About</a></li>
         <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -62,11 +64,11 @@
 
     <div class="text-end">
         {% if current_user.is_authenticated %}
-        <span>{{ current_user.login }}</span>
-        <a href="{{ url_for('user.logout') }}" class="btn btn-outline-info me-2">Sign out</a>
+            <span>{{ current_user.login }}</span>
+            <a href="{{ url_for('user.logout') }}" class="btn btn-outline-info me-2">Sign out</a>
         {% else %}
-        <a href="{{ url_for('user.login') }}" class="btn btn-outline-info me-2">Sign-In</a>
-        <a href="{{ url_for('user.register') }}" class="btn btn-warning">Sign-Up</a>
+            <a href="{{ url_for('user.login') }}" class="btn btn-outline-info me-2">Sign-In</a>
+            <a href="{{ url_for('user.register') }}" class="btn btn-warning">Sign-Up</a>
         {% endif %}
     </div>
 </div>

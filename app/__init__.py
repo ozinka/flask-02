@@ -19,7 +19,7 @@ def create_app(config_class=Config):
 
     # Login manager
     login_manager.login_view = 'user.login'
-    login_manager.login_message_category = 'danger'
+    login_manager.login_message_category = 'info'
     login_manager.login_message = 'Please login to access this page'
 
     with app.app_context():
