@@ -61,7 +61,12 @@
     </ul>
 
     <div class="text-end">
-        <button type="button" class="btn btn-outline-light me-2">Login</button>
-        <a class="btn btn-warning" href="{{ url_for('user.register') }}">Sign-up</a>
+        {% if current_user.is_authenticated %}
+        <span>{{ current_user.login }}</span>
+        <a href="{{ url_for('user.logout') }}" class="btn btn-outline-info me-2">Sign out</a>
+        {% else %}
+        <a href="{{ url_for('user.login') }}" class="btn btn-outline-info me-2">Sign-In</a>
+        <a href="{{ url_for('user.register') }}" class="btn btn-warning">Sign-Up</a>
+        {% endif %}
     </div>
 </div>

@@ -6,7 +6,16 @@
     <form method="post" enctype="multipart/form-data" class="form-control d-flex flex-column gap-2">
         {{ form.csrf_token }}
         {{ form.name(class='form-control', placeholder='Full name') }}
+
         {{ form.login(class='form-control', placeholder='Login') }}
+        {% if form.login.errors %}
+            <div class="invalid-feedback" style="display: block!important;">
+                {% for error in form.login.errors %}
+                    <span>{{ error }}</span>
+                {% endfor %}
+            </div>
+        {% endif %}
+
         {{ form.avatar(class='form-control') }}
         {{ form.password(class='form-control', placeholder='Password') }}
         {{ form.confirm_password(class='form-control', placeholder='Confirm Password') }}
