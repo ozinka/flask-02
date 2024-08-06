@@ -8,8 +8,8 @@
             <thead>
             <tr>
                 <th scope="col">ID</th>
-                <th scope="col">Teacher</th>
                 <th scope="col">Subject</th>
+                <th scope="col">Teacher</th>
                 <th scope="col">Student</th>
                 <th scope="col">Date</th>
                 {% if current_user.is_authenticated %}
@@ -17,12 +17,24 @@
                 {% endif %}
             </tr>
             </thead>
-            <tbody>
+            <tbody class="align-middle">
             {% for post in posts %}
                 <tr>
                     <td>{{ post.id }}</td>
                     <td>{{ post.subject }}</td>
-                    <td>{{ post.student }}</td>
+                    <td>
+                        <img height="48px" src="{{ url_for('static', filename='upload/'+post.author.avatar) }}"
+                             alt="{{ post.author.name }}">
+                        {{ post.author.name }}
+                    </td>
+
+                    <td>
+                        {% with student = user.query.get(post.student) %}
+                            <img height="48px" src="{{ url_for('static', filename='upload/'+student.avatar) }}"
+                                 alt="{{ post.author.name }}">
+                            {{ student.name }}
+                        {% endwith %}
+                    </td>
                     <td>{{ post.date.strftime('%Y-%m-%d %H:%M:%S') }}</td>
                     {% if current_user.is_authenticated %}
                         <td>

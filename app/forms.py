@@ -1,5 +1,6 @@
 from flask_wtf import FlaskForm
 from flask_wtf.file import FileField
+from wtforms.fields.choices import SelectField
 from wtforms.fields.simple import StringField, PasswordField, SubmitField, BooleanField
 from wtforms.validators import DataRequired, Length, EqualTo, ValidationError
 
@@ -26,3 +27,6 @@ class LoginForm(FlaskForm):
     password = PasswordField('Password', validators=[DataRequired()])
     remember = BooleanField('Remember Me')
     submit = SubmitField('Log In')
+
+class StudentForm(FlaskForm):
+    student = SelectField('student', choices=[('', 'student', 'teacher'),], render_kw={'class': 'form-control'})

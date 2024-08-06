@@ -3,9 +3,9 @@
 {% block title %}Add topic{% endblock %}
 
 {% block content %}
-<form method="post" class="form-control d-flex flex-column gap-2">
-    <input name="subject" type="text" placeholder="Subject" class="form-control">
-    <input name="student" type="text" placeholder="Student's First and Last name" class="form-control">
-    <input value="Add" type="submit" class="btn btn-success">
-</form>
+    <form method="post" class="form-control d-flex flex-column gap-2">
+        <input name="subject" type="text" placeholder="Subject" class="form-control">
+        {{ form.student }}
+        <input value="Add" type="submit" class="btn btn-success">
+    </form>
 {% endblock %}
