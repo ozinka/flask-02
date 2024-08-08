@@ -2,8 +2,15 @@
 
 {% block title %}All topics{% endblock %}
 
+
+
 {% block content %}
     <div class="table-responsive custom-table-responsive">
+        <form method="post" class="form-control d-flex flex-row gap-2" id="teacherForm">
+            {{ form.csrf_token }}
+            {{ form.teacher }}
+            <input type="submit" class="btn btn-success" value="Show">
+        </form>
         <table class="table table-striped table-hover table-bordered">
             <thead>
             <tr>
@@ -36,14 +43,14 @@
                         {% endwith %}
                     </td>
                     <td>{{ post.date.strftime('%Y-%m-%d %H:%M:%S') }}</td>
-                    {% if current_user.is_authenticated %}
-                        <td>
+                    <td>
+                        {% if current_user.is_authenticated and post.author.id == current_user.id %}
                             <a href="{{ url_for('post.update', id=post.id) }}" class="btn btn-sm btn-secondary"><span
                                     class="fas fa-edit"></span></a>
                             <a href="{{ url_for('post.delete', id=post.id) }}" class="btn btn-sm btn-danger"><span
                                     class="fas fa-trash"></span></a>
-                        </td>
-                    {% endif %}
+                        {% endif %}
+                    </td>
                 </tr>
             {% endfor %}
             </tbody>

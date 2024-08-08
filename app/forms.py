@@ -22,11 +22,17 @@ class RegistrationForm(FlaskForm):
         if user:
             raise ValidationError('Such login is already in use. Please choose a different one.')
 
+
 class LoginForm(FlaskForm):
     login = StringField('Login', validators=[DataRequired(), Length(min=2, max=20)])
     password = PasswordField('Password', validators=[DataRequired()])
     remember = BooleanField('Remember Me')
     submit = SubmitField('Log In')
 
+
 class StudentForm(FlaskForm):
-    student = SelectField('student', choices=[('', 'student', 'teacher'),], render_kw={'class': 'form-control'})
+    student = SelectField('student', choices=[], render_kw={'class': 'form-control'})
+
+
+class TeacherForm(FlaskForm):
+    teacher = SelectField('teacher', choices=[], render_kw={'class': 'form-control'})
