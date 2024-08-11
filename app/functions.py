@@ -4,6 +4,7 @@ from PIL import Image
 
 from flask import current_app as app
 
+
 def save_picture(picture):
     random_hex = secrets.token_hex(8)
     _, f_ext = os.path.splitext(picture.filename)
